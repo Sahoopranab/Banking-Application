@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        b {
+            font-size: 18px;
+        }
+    </style>
+    <script>
+    function calculate() {
+        // Get the input values
+        var principal = parseFloat(document.loandata.principal.value);
+        var annualInterestRate = parseFloat(document.loandata.interest.value);
+        var years = parseFloat(document.loandata.years.value);
+
+        // Validate the inputs
+        if (isNaN(principal) || isNaN(annualInterestRate) || isNaN(years) || principal <= 0 || annualInterestRate <= 0 || years <= 0) {
+            alert("Please enter valid positive numbers for all fields.");
+            return;
+        }
+
+        // Convert annual interest rate to monthly and calculate the number of payments
+        var monthlyInterestRate = annualInterestRate / 100 / 12;
+        var numberOfPayments = years * 12;
+
+        // Calculate the monthly payment using the loan formula
+        var x = Math.pow(1 + monthlyInterestRate, numberOfPayments);
+        var monthlyPayment = (principal * x * monthlyInterestRate) / (x - 1);
+
+        // Calculate total payment and total interest
+        var totalPayment = monthlyPayment * numberOfPayments;
+        var totalInterest = totalPayment - principal;
+
+        // Round the results to two decimal places
+        monthlyPayment = monthlyPayment.toFixed(2);
+        totalPayment = totalPayment.toFixed(2);
+        totalInterest = totalInterest.toFixed(2);
+
+        // Update the form fields with the calculated values
+        document.loandata.payment.value = monthlyPayment;
+        document.loandata.total.value = totalPayment;
+        document.loandata.totalinterest.value = totalInterest;
+    }
+
+    </script>
+</head>
+<body>
+    <form name="loandata">
+        <table>
+            <tr>
+                <td colspan="3"><b>Enter Loan Information:</b></td>
+            </tr>
+            <tr>
+                <td>1)</td>
+                <td>Amount of the loan (any currency):</td>
+                <td><input type="text" name="principal" onchange="calculate();"></td>
+            </tr>
+            <tr>
+                <td>2)</td>
+                <td>Annual percentage rate of interest:</td>
+                <td><input type="text" name="interest" onchange="calculate();"></td>
+            </tr>
+            <tr>
+                <td>3)</td>
+                <td>Repayment period in years:</td>
+                <td><input type="text" name="years" onchange="calculate();"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="button" value="Compute" onclick="calculate();">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><b>Payment Information:</b></td>
+            </tr>
+            <tr>
+                <td>4)</td>
+                <td>Your monthly payment will be:</td>
+                <td><input type="text" name="payment" readonly></td>
+            </tr>
+            <tr>
+                <td>5)</td>
+                <td>Your total payment will be:</td>
+                <td><input type="text" name="total" readonly></td>
+            </tr>
+            <tr>
+                <td>6)</td>
+                <td>Your total interest payments will be:</td>
+                <td><input type="text" name="totalinterest" readonly></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

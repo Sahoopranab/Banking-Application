@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Get Data</title>
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h3 {
+	text-align: center;
+	margin: 20px 0;
+}
+
+nav {
+	width: 100%;
+	background-color: green;
+}
+
+ul.nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px; /* Adjusted for better alignment */
+}
+
+ul.nav li {
+	margin: 0;
+	position: relative;
+}
+
+ul.nav a {
+	display: block;
+	padding: 0 15px;
+	color: white;
+	text-decoration: none;
+	line-height: 50px; /* Matches the height of the nav bar */
+	transition: background-color 0.3s, color 0.3s;
+}
+
+ul.nav a:hover, ul.nav li.current a {
+	color: green;
+	background: white;
+}
+
+table {
+	margin: 20px auto;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+td {
+	padding: 10px;
+	text-align: left;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 8px;
+	margin: 4px 0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+input[type="submit"] {
+	background-color: green;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+	background-color: darkgreen;
+}
+</style>
+<script>
+function validate()
+{
+var anum = document.getdata.anum.value;
+if(anum==null || anum=="")
+{
+alert("Account Number Cannot be Empty");
+return false;
+}
+}
+</script>
+</head>
+<body>
+	<nav>
+		<ul class="nav">
+			<li><a href="createaccount.html">Create Account</a></li>
+			<li><a href="withdraw.html">Withdraw Amount</a></li>
+			<li><a href="deposit.html">Deposit Amount</a></li>
+			<li><a href="getdata.html">Get Details</a></li>
+			<li><a href="nameupdate.html">Update Details</a></li>
+			<li><a href="deleterecord.html">Delete Account</a></li>
+			<li><a href="transfer.html">Transfer Amount</a></li>
+			<li><a href="CreditCard">Credit Card</a></li>
+			<li><a href="login.html">Logout</a></li>
+		</ul>
+	</nav>
+	<form name="getdata" action="GetRecord" method="post"
+		onsubmit="return 
+validate()">
+		<table align='center'>
+			<tr>
+				<td>Enter Account Number :</td>
+				<td><input type="text" name="anum" /></td>
+			</tr>
+			<tr>
+				<td colspan='2' align='center'><input type="submit"
+					value="Display Record" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
